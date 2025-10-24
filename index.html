@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2 Player Racing</title>
+<style>
+  body { text-align: center; font-family: sans-serif; }
+  #game { position: relative; width: 500px; height: 200px; border: 2px solid black; margin: 50px auto; background: #eee; }
+  .player { width: 50px; height: 50px; position: absolute; top: 75px; }
+  #player1 { background: red; left: 0; }
+  #player2 { background: blue; left: 0; top: 125px; }
+</style>
+</head>
+<body>
+<h1>2 Player Race</h1>
+<p>Player 1: Arrow Keys | Player 2: WASD</p>
+<div id="game">
+  <div id="player1" class="player"></div>
+  <div id="player2" class="player"></div>
+</div>
+
+<script>
+const player1 = document.getElementById('player1');
+const player2 = document.getElementById('player2');
+
+let p1Pos = 0;
+let p2Pos = 0;
+const finishLine = 450;
+
+document.addEventListener('keydown', e => {
+  switch(e.key){
+    case 'ArrowRight': p1Pos += 10; break;
+    case 'ArrowLeft': p1Pos -= 10; break;
+    case 'd': p2Pos += 10; break;
+    case 'a': p2Pos -= 10; break;
+  }
+  if(p1Pos < 0) p1Pos = 0;
+  if(p2Pos < 0) p2Pos = 0;
+  if(p1Pos > finishLine) { p1Pos = finishLine; alert("Player 1 Wins!"); p1Pos = 0; p2Pos = 0; }
+  if(p2Pos > finishLine) { p2Pos = finishLine; alert("Player 2 Wins!"); p1Pos = 0; p2Pos = 0; }
+
+  player1.style.left = p1Pos + 'px';
+  player2.style.left = p2Pos + 'px';
+});
+</script>
+</body>
+</html>
